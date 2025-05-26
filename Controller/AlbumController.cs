@@ -15,6 +15,6 @@ public class AlbumController(IMediator mediator) : ControllerBase
             return result is null ? NotFound() : Ok(result);
         }
         
-        return BadRequest("Provide either id or name.");
+        return BadRequest("Provide id.");
     }
 }

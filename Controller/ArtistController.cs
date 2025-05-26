@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using HollyJukeBox.QueryModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
