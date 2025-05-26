@@ -4,10 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HollyJukeBox.Controller;
 
+/// <summary>
+/// Handles album-related data access
+/// </summary>
+[ApiController]
+[Route("api/album")]
 public class AlbumController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] string? id)
+    public async Task<IActionResult> GetById([FromQuery] string? id)
     {
         if (!string.IsNullOrWhiteSpace(id))
         {
@@ -15,6 +20,6 @@ public class AlbumController(IMediator mediator) : ControllerBase
             return result is null ? NotFound() : Ok(result);
         }
         
-        return BadRequest("Provide id.");
+        return BadRequest("Provide id for the album");
     }
 }
