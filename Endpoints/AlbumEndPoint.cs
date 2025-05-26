@@ -1,13 +1,11 @@
-using System;
-using System.Threading.Tasks;
-using HollyJukeBox.QueryModels;
+using HollyJukeBox.Models;
+using HollyJukeBox.Services;
+using Microsoft.Extensions.Options;
 
 namespace HollyJukeBox.Endpoints;
 
-public class AlbumEndPoint : IAlbumEndPoint
+public class AlbumEndPoint(IOptions<ApiSettings> options, HttpClient client) : IAlbumEndPoint
 {
-    public Task<AlbumQuery> GetById()
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<AlbumDto> GetById(string id) => 
+        await client.GetFromJsonAsync<AlbumDto>(options.Value.CoverArtArchiveUrl + $"release-group/{id}");
 }

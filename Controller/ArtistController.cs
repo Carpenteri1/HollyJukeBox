@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using HollyJukeBox.QueryModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +26,6 @@ public class ArtistController(IMediator mediator) : ControllerBase
             var result = await mediator.Send(new ArtistQuery.GetByName(name));
             return result is null ? NotFound() : Ok(result);
         }
-        return BadRequest("Provide either id or name.");
+        return BadRequest("Provide either id or name for the artist");
     }
 }

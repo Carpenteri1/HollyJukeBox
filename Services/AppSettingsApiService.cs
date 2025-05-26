@@ -10,9 +10,4 @@ public class AppSettingsApiService
         {
             _settings = options.Value;
         }
-
-        /*public void UseSettings()
-        {
-            Console.WriteLine(_settings.ApiKey);
-        }*/
 }
