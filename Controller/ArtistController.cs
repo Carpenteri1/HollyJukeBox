@@ -12,20 +12,50 @@ namespace HollyJukeBox.Controller;
 public class ArtistController(IMediator mediator) : ControllerBase
 {
 
-    [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] string? id, [FromQuery] string? name)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromQuery] string? id)
     {
         if (!string.IsNullOrWhiteSpace(id))
         {
             var result = await mediator.Send(new ArtistQuery.GetById(id));
             return result is null ? NotFound() : Ok(result);
         }
-        
+        return BadRequest("Provide either id for the artist");
+    }
+
+    [HttpGet("{name}")]
+
+    public async Task<IActionResult> GetByName([FromQuery] string? name)
+    {
         if (!string.IsNullOrWhiteSpace(name))
         {
             var result = await mediator.Send(new ArtistQuery.GetByName(name));
             return result is null ? NotFound() : Ok(result);
         }
-        return BadRequest("Provide either id or name for the artist");
+        return BadRequest("Provide either name for the artist");
+    }
+    
+    [HttpGet("wikidata/{id}")]
+    public async Task<IActionResult> GetWikidataById(string? id)
+    {
+        if (!string.IsNullOrWhiteSpace(id))
+        {
+            var result = await mediator.Send(new ArtistQuery.GetWikiData(id));
+            return result is null ? NotFound() : Ok(result);
+        }
+        
+        return BadRequest("Provide id for the wikidata");
+    }
+    
+    [HttpGet("summery/{artist}")]
+    public async Task<IActionResult> GetWikiDataSummery(string? artist)
+    {
+        if (!string.IsNullOrWhiteSpace(artist))
+        {
+            var result = await mediator.Send(new ArtistQuery.GetWikipediaSummary(artist));
+            return result is null ? NotFound() : Ok(result);
+        }
+        
+        return BadRequest("Provide id for the wikidata");
     }
 }

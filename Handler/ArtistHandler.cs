@@ -7,7 +7,9 @@ namespace HollyJukeBox.Handler;
 
 public class ArtistHandler(IArtistEndPoint artistEndPoint) : 
     IRequestHandler<ArtistQuery.GetById, ArtistDto>, 
-    IRequestHandler<ArtistQuery.GetByName, ArtistDto>
+    IRequestHandler<ArtistQuery.GetByName, ArtistDto>,
+    IRequestHandler<ArtistQuery.GetWikiData, WikiDataDto>,
+    IRequestHandler<ArtistQuery.GetWikipediaSummary, WikipediaSummaryDto>
 {
     public async Task<ArtistDto> Handle(ArtistQuery.GetById query, CancellationToken cancellationToken) 
         => await artistEndPoint.GetById(query.Id);
@@ -19,5 +21,9 @@ public class ArtistHandler(IArtistEndPoint artistEndPoint) :
         artist = await artistEndPoint.GetById(artist.Id);
         return artist; 
     }
-    
+
+    public async Task<WikiDataDto> Handle(ArtistQuery.GetWikiData request, CancellationToken cancellationToken) 
+        => await artistEndPoint.GetWikiData(request.id);
+    public async Task<WikipediaSummaryDto> Handle(ArtistQuery.GetWikipediaSummary request, CancellationToken cancellationToken) 
+        => await artistEndPoint.GetWikipediaSummary(request.artist);
 }

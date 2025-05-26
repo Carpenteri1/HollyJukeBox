@@ -11,6 +11,8 @@ public class ArtistDto
    
    [JsonPropertyName("release-groups")]
    public List<ReleasesGroups> ReleasesGroups { get; set; }
+   [JsonPropertyName("relations")]
+   public List<Relations> Relations { get; set; }
 }
 
 public record ReleasesGroups(
@@ -18,3 +20,6 @@ public record ReleasesGroups(
    [property: JsonPropertyName("title")] string Title,
    [property: JsonPropertyName("first-release-date")] string FirstReleaseDate
 );
+
+public record Relations(List<Url> url);
+public record Url(string id, string resource);
