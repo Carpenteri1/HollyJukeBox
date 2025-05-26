@@ -5,6 +5,6 @@ namespace HollyJukeBox.QueryModels;
 
 public class AlbumQuery
 {
-    public record GetById(Guid Id) : IRequest<AlbumDto>;
+    public record GetById(string Id) : IRequest<AlbumDto>;
     public record GetByName(string Name) : IRequest<AlbumDto>;
 }

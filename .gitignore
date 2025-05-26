@@ -1,0 +1,15 @@
+# Build artifacts
+bin/
+obj/
+dist/
+publish/
+
+# Rider/IDEA settings
+.idea/
+*.user
+*.suo
+
+# macOS system file
+.DS_Store
+
+

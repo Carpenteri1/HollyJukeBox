@@ -1,5 +1,8 @@
+using System;
 using HollyJukeBox.Endpoints;
 using HollyJukeBox.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
