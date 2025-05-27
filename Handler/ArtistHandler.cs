@@ -15,7 +15,7 @@ public class ArtistHandler(IArtistEndPoint artistEndPoint) :
         => await artistEndPoint.GetById(query.Id);
 
     public async Task<ArtistDto> Handle(ArtistQuery.GetByName query, CancellationToken cancellationToken)
-    {
+    {   
         var result = await artistEndPoint.GetByName(query.Name);
         var artist = result.Artists.First(x => string.Equals(x.Name, query.Name, StringComparison.OrdinalIgnoreCase));
         artist = await artistEndPoint.GetById(artist.Id);
@@ -25,5 +25,5 @@ public class ArtistHandler(IArtistEndPoint artistEndPoint) :
     public async Task<WikiDataDto> Handle(ArtistQuery.GetWikiData request, CancellationToken cancellationToken) 
         => await artistEndPoint.GetWikiData(request.id);
     public async Task<WikipediaSummaryDto> Handle(ArtistQuery.GetWikipediaSummary request, CancellationToken cancellationToken) 
-        => await artistEndPoint.GetWikipediaSummary(request.artist);
+        => await artistEndPoint.GetWikipediaSummary(request.enwikiTitle);
 }

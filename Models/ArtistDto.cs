@@ -21,5 +21,5 @@ public record ReleasesGroups(
    [property: JsonPropertyName("first-release-date")] string FirstReleaseDate
 );
 
-public record Relations(List<Url> url);
+public record Relations(string type, Url url);
 public record Url(string id, string resource);

@@ -9,10 +9,11 @@ public class WikiDataDto
 }
 public record Entity(
     [property: JsonPropertyName("id")] string Id,
-    [property: JsonPropertyName("sitelinks")] List<SiteLink> SiteLinks
+    [property: JsonPropertyName("sitelinks")] Dictionary<string, SiteLink> Sitelinks 
 );
 public record SiteLink(
-    [property: JsonPropertyName("enwiki")] Enwiki Enwiki
+    [property: JsonPropertyName("site")] string site,
+    [property: JsonPropertyName("title")] string title
 );
 
 public record Enwiki(
