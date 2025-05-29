@@ -1,9 +1,5 @@
 using System.Text.Json.Serialization;
-
 namespace HollyJukeBox.Models;
-
-public class ArtistsDto
-{
-    [JsonPropertyName("artists")]
-    public List<ArtistDto> Artists { get; set; }
-}
+public record ArtistsDto(
+    [property: JsonPropertyName("artists")] List<ArtistDto> Artists
+);
