@@ -35,13 +35,13 @@ public class ArtistInfoHandler(
             if(artist.Albums is not null && artist.Albums.Count > 0)
             { 
                 artist.Albums = albumList.ToList();
-                memoryCashingService.Store(request.Id, artist);
+                memoryCashingService.Store($"artist:{request.Id}", artist);
                 return artist;
             } 
         }
 
         var summary = string.Empty;
-        var artistDto = memoryCashingService.Get<ArtistDto>(request.Id);
+        var artistDto = memoryCashingService.Get<ArtistDto>($"artistDto:{request.Id}");
         if (artistDto is null)
         {
             artistDto = await artistRepository.GetByIdAsync(request.Id);
@@ -68,6 +68,7 @@ public class ArtistInfoHandler(
         
                 var wikiSummary = await artistEndPoint.GetWikipediaSummary(wikiSummaryId);
                 summary = wikiSummary.Extract;
+                memoryCashingService.Store($"artistDto:{request.Id}", artistDto);
             }
         }
         var albums = new List<AlbumInfo>();
@@ -94,7 +95,7 @@ public class ArtistInfoHandler(
             Albums = albums
         };
 
-        memoryCashingService.Store(request.Id, artist);
+        memoryCashingService.Store($"artist:{request.Id}", artist);
         await artistInfoRepository.SaveAsync(artist);
         await albumInfoRepository.SaveAsync(artist.Albums);
         return artist;

@@ -2,10 +2,10 @@ namespace HollyJukeBox.Models;
 
 public class AlbumInfo
 {
-    public string Id { get; set; }
-    public string ArtistInfoId { get; set; }
-    public string Title { get; set; }
-    public string FirstReleaseDate { get; set; }
-    public string ImageFront { get; set; }
-    public string ImageBack { get; set; }
+    public required string Id { get; set; }
+    public required string ArtistInfoId { get; set; }
+    public required string Title { get; set; }
+    public required string FirstReleaseDate { get; set; }
+    public required string ImageFront { get; set; }
+    public required string ImageBack { get; set; }
 }

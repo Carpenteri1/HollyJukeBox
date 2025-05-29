@@ -17,7 +17,7 @@ public class ArtistHandler(
 {
     public async Task<ArtistDto> Handle(ArtistQuery.GetById request, CancellationToken cancellationToken)
     {
-        var artist = memoryCashingService.Get<ArtistDto>(request.Id);
+        var artist = memoryCashingService.Get<ArtistDto>($"artistDto:{request.Id}");
         
         if (artist is not null)
         {
@@ -27,12 +27,12 @@ public class ArtistHandler(
         artist = await artistRepository.GetByIdAsync(request.Id);
         if (artist is not null)
         {
-            memoryCashingService.Store(request.Id, artist);
+            memoryCashingService.Store($"artistDto:{request.Id}", artist);
             return artist;
         }
         
         artist = await artistEndPoint.GetById(request.Id);
-        memoryCashingService.Store(request.Id, artist);
+        memoryCashingService.Store($"artistDto:{request.Id}", artist);
         await artistRepository.SaveAsync(artist);
         return artist;
     }

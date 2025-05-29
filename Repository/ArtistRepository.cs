@@ -6,7 +6,7 @@ namespace HollyJukeBox.Repository;
 
 public class ArtistRepository(IDbConnection connection) : IArtistRepository
 {   
-    public async Task<ArtistDto?> GetByIdAsync(string id)
+    public async Task<ArtistDto> GetByIdAsync(string id)
     {
         var artist = await connection.QueryFirstOrDefaultAsync<ArtistDto>(
             "SELECT Id, Name FROM Artist WHERE Id = @Id", new { Id = id });

@@ -2,8 +2,8 @@ namespace HollyJukeBox.Models;
 
 public class ArtistInfo
 {
-    public string Mbid { get; set; }
-    public string Artist { get; set; }
-    public List<AlbumInfo> Albums { get; set; }
-    public string Description { get; set; }
+    public required string Mbid { get; set; }
+    public required string Artist { get; set; }
+    public required List<AlbumInfo>? Albums { get; set; }
+    public required string Description { get; set; }
 }

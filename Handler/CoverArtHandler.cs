@@ -15,7 +15,7 @@ public class CoverArtHandler(
 {
     public async Task<CoverArtDto> Handle(CoverArtQuery.GetById request, CancellationToken cancellationToken)
     {
-        var coverArt = memoryCashingService.Get<CoverArtDto>(request.Id);
+        var coverArt = memoryCashingService.Get<CoverArtDto>($"coverArt:{request.Id}");
         if (coverArt is not null)
         {
             return coverArt;
@@ -24,12 +24,12 @@ public class CoverArtHandler(
         coverArt = await coverArtRepository.GetByIdAsync(request.Id);
         if (coverArt is not null)
         {
-            memoryCashingService.Store(request.Id, coverArt);
+            memoryCashingService.Store($"coverArt:{request.Id}", coverArt);
             return coverArt;
         }
         
         coverArt = await coverArtEndPoint.GetById(request.Id);
-        memoryCashingService.Store(request.Id, coverArt);
+        memoryCashingService.Store($"coverArt:{request.Id}", coverArt);
         await coverArtRepository.SaveAsync(coverArt);
         return coverArt;
     }
