@@ -6,7 +6,7 @@ namespace HollyJukeBox.Repository;
 
 public class CoverArtRepository(IDbConnection connection) : ICoverArtRepository
 {   
-    public async Task<CoverArtDto> GetByIdAsync(string id)
+    public async Task<CoverArtDto?> GetByIdAsync(string id)
     {
         var builder = new SqlBuilder();
         var template = builder.AddTemplate(

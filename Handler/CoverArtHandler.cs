@@ -29,6 +29,14 @@ public class CoverArtHandler(
         }
         
         coverArt = await coverArtEndPoint.GetById(request.Id);
+        coverArt.Id = request.Id;
+        var sortedImages = coverArt.Images
+            .Where(x =>
+                x.Types.Contains(nameof(ImageTypes.Front)) ||
+                x.Types.Contains(nameof(ImageTypes.Back)));
+
+        coverArt.Images = sortedImages.ToList();
+        
         memoryCashingService.Store($"coverArt:{request.Id}", coverArt);
         await coverArtRepository.SaveAsync(coverArt);
         return coverArt;

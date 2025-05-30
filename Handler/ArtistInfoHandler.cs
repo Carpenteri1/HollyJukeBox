@@ -9,11 +9,13 @@ namespace HollyJukeBox.Handler;
 
 public class ArtistInfoHandler(
     IArtistEndPoint artistEndPoint,
+    ICoverArtEndPoint coverArtEndPoint,
     IMemoryCashingService memoryCashingService,
     IArtistRepository artistRepository, 
     IArtistInfoRepository artistInfoRepository, 
     IAlbumInfoRepository albumInfoRepository, 
-    ICoverArtRepository coverArtRepository) 
+    ICoverArtRepository coverArtRepository,
+    IRetryPolicyService retryPolicy) 
     : IRequestHandler<ArtistInfoQuery.GetById, ArtistInfo>
 {
     public async Task<ArtistInfo> Handle(ArtistInfoQuery.GetById request, CancellationToken cancellationToken)
@@ -27,17 +29,15 @@ public class ArtistInfoHandler(
         artist = await artistInfoRepository.GetByIdAsync(request.Id);
         if (artist is not null)
         {
-            IEnumerable<AlbumInfo> albumList = null;
-            if(artist.Albums is null && artist.Albums.Count == 0)
-            { 
-                albumList = await albumInfoRepository.GetByArtistIdAsync(artist.Mbid);
-            } 
-            if(artist.Albums is not null && artist.Albums.Count > 0)
+            var albumList = await albumInfoRepository.GetByArtistIdAsync(request.Id);
+            if(albumList is not null && albumList.ToList().Count > 0)
             { 
                 artist.Albums = albumList.ToList();
                 memoryCashingService.Store($"artist:{request.Id}", artist);
                 return artist;
-            } 
+            }
+
+            return null;
         }
 
         var summary = string.Empty;
@@ -75,22 +75,39 @@ public class ArtistInfoHandler(
         
         foreach (var release in artistDto.ReleaseGroups)
         {
-            //var coverArts = await coverArtRepository.GetByIdAsync(release.Id);
-            //var images = coverArts.Images;
+            var coverArt = memoryCashingService.Get<CoverArtDto>($"coverArt:{release.Id}");//TODO fix 
+            if(coverArt is null) coverArt = await coverArtRepository.GetByIdAsync(release.Id);
+            if(coverArt is null)
+            {
+                coverArt = await retryPolicy.RetryGet().ExecuteAsync(() => coverArtEndPoint.GetById(release.Id));
+                if(coverArt is not null)
+                {
+                    var sortedImages = coverArt.Images
+                        .Where(x =>
+                            x.Types.Contains(nameof(ImageTypes.Front)) ||
+                            x.Types.Contains(nameof(ImageTypes.Back)));
+
+                    coverArt.Images = sortedImages.ToList();
+                    coverArt.Id = release.Id;
+                }
+            }
+            
             albums.Add(new AlbumInfo
             {
                 Id = release.Id,
                 ArtistInfoId = artistDto.Id,
                 Title = release.Title,
                 FirstReleaseDate = release.FirstReleaseDate,
-                //ImageFront =  images.First(x => x.Types.Equals(ImageTypes.Front)).Image,
-                //ImageBack = images.First(x => x.Types.Equals(ImageTypes.Back)).Image
+                ImageFront = coverArt.Images.FirstOrDefault(x => x.Types.Contains(nameof(ImageTypes.Front)))?.Image ?? string.Empty,
+                ImageBack = coverArt.Images.FirstOrDefault(x => x.Types.Contains(nameof(ImageTypes.Back)))?.Image ?? string.Empty
             });
+            memoryCashingService.Store($"coverArt:{release.Id}", coverArt);
+            await coverArtRepository.SaveAsync(coverArt);
         }
         artist = new ArtistInfo
         {
             Mbid = artistDto.Id,
-            Artist = artistDto.Name,
+            Name = artistDto.Name,
             Description = summary,
             Albums = albums
         };

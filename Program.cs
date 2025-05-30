@@ -19,6 +19,7 @@ builder.Services.AddScoped<IArtistInfoRepository, ArtistInfoRepository>();
 builder.Services.AddScoped<IAlbumInfoRepository, AlbumInfoRepository>();
 
 builder.Services.AddSingleton<IMemoryCashingService, MemoryCashingService>();
+builder.Services.AddSingleton<IRetryPolicyService, RetryPolicyService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

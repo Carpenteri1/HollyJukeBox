@@ -6,10 +6,10 @@ namespace HollyJukeBox.Repository;
 
 public class ArtistInfoRepository(IDbConnection connection) : IArtistInfoRepository
 {
-    public async Task<ArtistInfo> GetByIdAsync(string id)
+    public async Task<ArtistInfo?> GetByIdAsync(string id)
     {
         var builder = new SqlBuilder();
-        var template = builder.AddTemplate("SELECT * FROM ArtistInfo /**where**/ LIMIT 1");
+        var template = builder.AddTemplate("SELECT Id AS Mbid, Name, Description FROM ArtistInfo /**where**/ LIMIT 1");
         builder.Where("id = @Id", new { Id = id });
         return await connection.QueryFirstOrDefaultAsync<ArtistInfo>(template.RawSql, 
             new { Id = id });
@@ -24,9 +24,9 @@ public class ArtistInfoRepository(IDbConnection connection) : IArtistInfoReposit
         
         return await connection.ExecuteAsync(artistInsert.RawSql, 
             new
-            {
-                artist.Mbid, 
-                artist.Artist,
+            { 
+                Id = artist.Mbid, 
+                artist.Name,
                 artist.Description
             });
     }
