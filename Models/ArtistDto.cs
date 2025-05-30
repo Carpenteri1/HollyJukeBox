@@ -1,25 +1,28 @@
 using System.Text.Json.Serialization;
-
 namespace HollyJukeBox.Models;
 
 public class ArtistDto
 {
-   [JsonPropertyName("id")]
+   [JsonPropertyName("id")] 
    public string Id { get; set; }
-   [JsonPropertyName("name")]
+   [JsonPropertyName("name")] 
    public string Name { get; set; }
-   
-   [JsonPropertyName("release-groups")]
-   public List<ReleasesGroups> ReleasesGroups { get; set; }
+   [JsonPropertyName("release-groups")] 
+   public List<ReleaseGroup> ReleaseGroups { get; set; } = new();
    [JsonPropertyName("relations")]
-   public List<Relations> Relations { get; set; }
+   public List<Relations> Relations { get; set; } = new();
 }
-
-public record ReleasesGroups(
+public record Relations(
+   [property: JsonPropertyName("type")]string type, 
+   [property: JsonPropertyName("url")]Url url 
+);
+public record ReleaseGroup(
    [property: JsonPropertyName("id")] string Id,
    [property: JsonPropertyName("title")] string Title,
    [property: JsonPropertyName("first-release-date")] string FirstReleaseDate
 );
 
-public record Relations(string type, Url url);
-public record Url(string id, string resource);
+public record Url(
+   [property: JsonPropertyName("id")]string id, 
+   [property: JsonPropertyName("resource")]string resource
+);

@@ -22,17 +22,6 @@ public class ArtistController(IMediator mediator) : ControllerBase
         }
         return BadRequest("Provide either id for the artist");
     }
-
-    [HttpGet("name")]
-    public async Task<IActionResult> GetByName([FromQuery] string? name)
-    {
-        if (!string.IsNullOrWhiteSpace(name))
-        {
-            var result = await mediator.Send(new ArtistQuery.GetByName(name));
-            return result is null ? NotFound() : Ok(result);
-        }
-        return BadRequest("Provide either name for the artist");
-    }
     
     [HttpGet("wikidata")]
     public async Task<IActionResult> GetWikidataById([FromQuery] string? id)

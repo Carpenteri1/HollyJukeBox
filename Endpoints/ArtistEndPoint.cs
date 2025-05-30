@@ -9,9 +9,6 @@ public class ArtistEndPoint(IOptions<ApiSettings> options, HttpClient client) : 
     public async Task<ArtistDto> GetById(string id) => await client.GetFromJsonAsync<ArtistDto>(
         options.Value.MusicBrainzUrl + $"artist/{id}?inc=release-groups+url-rels&fmt=json");
     
-    public async Task<ArtistsDto> GetByName(string name) => await client.GetFromJsonAsync<ArtistsDto>(
-        options.Value.MusicBrainzUrl + $"artist?query={name}&fmt=json");
-    
     public async Task<WikiDataDto> GetWikiData(string id) => await client.GetFromJsonAsync<WikiDataDto>(
             options.Value.WikiDataUrl + $"?action=wbgetentities&ids={id}&format=json&props=sitelinks");
     
