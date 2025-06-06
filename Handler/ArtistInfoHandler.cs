@@ -75,7 +75,7 @@ public class ArtistInfoHandler(
         
         foreach (var release in artistDto.ReleaseGroups)
         {
-            var coverArt = memoryCashingService.Get<CoverArtDto>($"coverArt:{release.Id}");//TODO fix 
+            var coverArt = memoryCashingService.Get<CoverArtDto>($"coverArt:{release.Id}");
             if(coverArt is null) coverArt = await coverArtRepository.GetByIdAsync(release.Id);
             if(coverArt is null)
             {

@@ -43,6 +43,12 @@ using (var scope = app.Services.CreateScope())
     await dbInit.EnsureTablesCreatedAsync();
 }
 
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+});
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapControllers();
