@@ -1,9 +1,9 @@
 using System.Net;
-using HollyJukeBox.Models;
-using HollyJukeBox.Services;
+using JukeBox.Models;
+using JukeBox.Services;
 using Microsoft.Extensions.Options;
 
-namespace HollyJukeBox.Endpoints;
+namespace JukeBox.Endpoints;
 
 public class CoverArtEndPoint(IOptions<ApiSettings> options, HttpClient client) : ICoverArtEndPoint
 {

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 
-namespace HollyJukeBox.Services;
+namespace JukeBox.Services;
 
 public class AppSettingsApiService
 {

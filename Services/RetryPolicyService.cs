@@ -1,6 +1,6 @@
 using Polly;
 
-namespace HollyJukeBox.Services;
+namespace JukeBox.Services;
 
 public class RetryPolicyService : IRetryPolicyService
 {

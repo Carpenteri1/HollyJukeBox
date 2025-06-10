@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "HollyJukeBox": {
+    "JukeBox": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

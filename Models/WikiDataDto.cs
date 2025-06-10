@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace HollyJukeBox.Models;
+namespace JukeBox.Models;
 
 public record WikiDataDto(
     [property:JsonPropertyName("entities")] Dictionary<string, Entity> Entities

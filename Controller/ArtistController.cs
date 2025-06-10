@@ -1,8 +1,8 @@
-using HollyJukeBox.QueryModels;
+using JukeBox.QueryModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HollyJukeBox.Controller;
+namespace JukeBox.Controller;
 
 /// <summary>
 /// Handles artist-related data access

@@ -1,4 +1,4 @@
-namespace HollyJukeBox.Services;
+namespace JukeBox.Services;
 
 public class ApiSettings
 {

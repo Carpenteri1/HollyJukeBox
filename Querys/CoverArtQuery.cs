@@ -1,7 +1,7 @@
-using HollyJukeBox.Models;
+using JukeBox.Models;
 using MediatR;
 
-namespace HollyJukeBox.QueryModels;
+namespace JukeBox.QueryModels;
 
 public class CoverArtQuery
 {

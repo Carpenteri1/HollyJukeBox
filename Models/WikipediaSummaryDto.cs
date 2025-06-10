@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace HollyJukeBox.Models;
+namespace JukeBox.Models;
 
 public record WikipediaSummaryDto
 (

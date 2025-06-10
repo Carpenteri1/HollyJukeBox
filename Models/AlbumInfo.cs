@@ -1,4 +1,4 @@
-namespace HollyJukeBox.Models;
+namespace JukeBox.Models;
 
 public class AlbumInfo
 {

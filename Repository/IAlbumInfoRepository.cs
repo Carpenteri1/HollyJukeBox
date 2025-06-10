@@ -1,6 +1,6 @@
-using HollyJukeBox.Models;
+using JukeBox.Models;
 
-namespace HollyJukeBox.Repository;
+namespace JukeBox.Repository;
 
 public interface IAlbumInfoRepository
 {

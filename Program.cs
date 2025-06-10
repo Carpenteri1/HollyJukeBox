@@ -1,7 +1,7 @@
-using HollyJukeBox.Data;
-using HollyJukeBox.Endpoints;
-using HollyJukeBox.Repository;
-using HollyJukeBox.Services;
+using JukeBox.Data;
+using JukeBox.Endpoints;
+using JukeBox.Repository;
+using JukeBox.Services;
 using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +10,7 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<DbInitializer>();
 builder.Services.AddScoped<System.Data.IDbConnection>(sp =>
-    new SqliteConnection(builder.Configuration.GetConnectionString("HollyJukeBoxDb")));
+    new SqliteConnection(builder.Configuration.GetConnectionString("JukeBoxDb")));
 builder.Services.AddScoped<IArtistEndPoint, ArtistEndPoint>();
 builder.Services.AddScoped<ICoverArtEndPoint, CoverArtEndPoint>();
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
@@ -32,7 +32,7 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 builder.Services.AddHttpClient<IArtistEndPoint, ArtistEndPoint>(client =>
 {
-    client.DefaultRequestHeaders.Add("User-Agent", "HollyJukeBox");
+    client.DefaultRequestHeaders.Add("User-Agent", "JukeBoxkeBox");
 });
 
 var app = builder.Build();

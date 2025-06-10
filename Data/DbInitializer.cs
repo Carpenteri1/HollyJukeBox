@@ -1,7 +1,7 @@
 using Dapper;
 using Microsoft.Data.Sqlite;
 
-namespace HollyJukeBox.Data;
+namespace JukeBox.Data;
 
 public class DbInitializer
 {
@@ -9,7 +9,7 @@ public class DbInitializer
 
     public DbInitializer(IConfiguration configuration)
     {
-        connection = new SqliteConnection(configuration.GetConnectionString("HollyJukeBoxDb"));
+        connection = new SqliteConnection(configuration.GetConnectionString("JukeBoxDb"));
     }
     
     public async Task EnsureTablesCreatedAsync()

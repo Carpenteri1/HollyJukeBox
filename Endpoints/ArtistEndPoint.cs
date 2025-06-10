@@ -1,8 +1,8 @@
-using HollyJukeBox.Models;
-using HollyJukeBox.Services;
+using JukeBox.Models;
+using JukeBox.Services;
 using Microsoft.Extensions.Options;
 
-namespace HollyJukeBox.Endpoints;
+namespace JukeBox.Endpoints;
 
 public class ArtistEndPoint(IOptions<ApiSettings> options, HttpClient client) : IArtistEndPoint
 {

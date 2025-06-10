@@ -1,11 +1,11 @@
-using HollyJukeBox.Endpoints;
-using HollyJukeBox.Models;
-using HollyJukeBox.QueryModels;
-using HollyJukeBox.Repository;
-using HollyJukeBox.Services;
+using JukeBox.Endpoints;
+using JukeBox.Models;
+using JukeBox.QueryModels;
+using JukeBox.Repository;
+using JukeBox.Services;
 using MediatR;
 
-namespace HollyJukeBox.Handler;
+namespace JukeBox.Handler;
 
 public class ArtistHandler(
     IArtistEndPoint artistEndPoint, 

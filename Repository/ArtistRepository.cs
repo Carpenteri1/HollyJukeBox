@@ -1,8 +1,8 @@
 using System.Data;
-using HollyJukeBox.Models;
+using JukeBox.Models;
 using Dapper;
 
-namespace HollyJukeBox.Repository;
+namespace JukeBox.Repository;
 
 public class ArtistRepository(IDbConnection connection) : IArtistRepository
 {   

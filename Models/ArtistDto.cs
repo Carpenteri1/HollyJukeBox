@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-namespace HollyJukeBox.Models;
+namespace JukeBox.Models;
 
 public class ArtistDto
 {

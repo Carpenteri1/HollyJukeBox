@@ -1,6 +1,6 @@
-using HollyJukeBox.Models;
+using JukeBox.Models;
 
-namespace HollyJukeBox.Endpoints;
+namespace JukeBox.Endpoints;
 
 public interface ICoverArtEndPoint
 {

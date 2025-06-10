@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Caching.Memory;
 
-namespace HollyJukeBox.Services;
+namespace JukeBox.Services;
 
 public class MemoryCashingService(IMemoryCache memoryCache) : IMemoryCashingService
 {

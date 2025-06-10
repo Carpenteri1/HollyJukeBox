@@ -1,12 +1,12 @@
 [![.NET](https://github.com/Carpenteri1/JukeBox/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Carpenteri1/JukeBox/actions/workflows/dotnet.yml)
 [![CodeQL Advanced](https://github.com/Carpenteri1/JukeBox/actions/workflows/codeql.yml/badge.svg)](https://github.com/Carpenteri1/JukeBox/actions/workflows/codeql.yml)
 
-# Holly JukeBox
+# JukeBox
 
 ### Start
--  git clone https://github.com/Carpenteri1/JukeBox.git or download HollyJukeBox.zip
+-  git clone https://github.com/Carpenteri1/JukeBox.git or download JukeBox.zip
 -  unzip (skip if git clone)
--  cd HollyJukeBox
+-  cd JukeBox
 -  dotnet restore
 -  dotnet build
 -  dotnet run
