@@ -1,10 +1,10 @@
-[![.NET](https://github.com/Carpenteri1/HollyJukeBox/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Carpenteri1/HollyJukeBox/actions/workflows/dotnet.yml)
-[![CodeQL Advanced](https://github.com/Carpenteri1/HollyJukeBox/actions/workflows/codeql.yml/badge.svg)](https://github.com/Carpenteri1/HollyJukeBox/actions/workflows/codeql.yml)
+[![.NET](https://github.com/Carpenteri1/JukeBox/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Carpenteri1/JukeBox/actions/workflows/dotnet.yml)
+[![CodeQL Advanced](https://github.com/Carpenteri1/JukeBox/actions/workflows/codeql.yml/badge.svg)](https://github.com/Carpenteri1/JukeBox/actions/workflows/codeql.yml)
 
 # Holly JukeBox
 
 ### Start
--  git clone https://github.com/Carpenteri1/HollyJukeBox.git or download HollyJukeBox.zip
+-  git clone https://github.com/Carpenteri1/JukeBox.git or download HollyJukeBox.zip
 -  unzip (skip if git clone)
 -  cd HollyJukeBox
 -  dotnet restore
@@ -21,8 +21,8 @@
 #### macOS (Apple Silicon)
 - dotnet publish -c Release -r osx-arm64 --self-contained true
 
-You will find everything in HollyJukeBox/bin/Release/net8.0/osx-arm64/publish/
-A file called HollyJukeBox will be created, which you can run.
+You will find everything in JukeBox/bin/Release/net8.0/osx-arm64/publish/
+A file called JukeBox will be created, which you can run.
 ### Ramverk
 - NET Core 8
 - ADO.NET
