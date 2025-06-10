@@ -23,7 +23,7 @@
 
 You will find everything in JukeBox/bin/Release/net8.0/osx-arm64/publish/
 A file called JukeBox will be created, which you can run.
-### Ramverk
+### Frameworks
 - NET Core 8
 - ADO.NET
 - ASP.NET
